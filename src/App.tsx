@@ -7,17 +7,17 @@ import {addUserAC, deleteUserAC, UserType} from "./state/user-reducer";
 import {getManyUsers} from "./state/getManyUsers";
 
 
-function App() {
+const  App = () => {
     const dispatch = useAppDispatch()
     const cashSelector: number = useSelector<RootStateType, number>(state => state.cash.cash)
     const userSelector: UserType[] = useSelector<RootStateType, UserType[]>(state => state.users.users)
 
 
-    const addCash = (value: number) => {
-        dispatch(addCashAC(value))
+    const addCash = (value: string) => {
+        isFinite(+value) && dispatch(addCashAC(+value))
     }
-    const getCash = (value: number) => {
-        dispatch(getCashAC(value))
+    const getCash = (value: string) => {
+        isFinite(+value) && dispatch(getCashAC(+value))
     }
 
 
@@ -34,8 +34,8 @@ function App() {
         <div>
             <div style={{textAlign: 'center', marginTop: '20px'}}>{cashSelector}</div>
             <div>
-                <button onClick={() => addCash(Number(prompt()))}>Add cash</button>
-                <button onClick={() => getCash(Number(prompt()))}>Get cash</button>
+                <button onClick={() => addCash(String(prompt()))}>Add cash</button>
+                <button onClick={() => getCash(String(prompt()))}>Get cash</button>
 
                 <button onClick={() => addUser(String(prompt()))}>Add User</button>
                 <button onClick={() => dispatch(getManyUsers())}>Get Users</button>
