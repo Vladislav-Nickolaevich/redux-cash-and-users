@@ -15,7 +15,7 @@ export const cashReducer = (state: initialCashStateType = initialCashState, acti
         case ADD_CASH:
             return {...state, cash: state.cash + action.cash}
         case GET_CASH:
-            return {...state, cash: state.cash + action.cash}
+            return {...state, cash: state.cash - action.cash}
         default:
             return state
     }

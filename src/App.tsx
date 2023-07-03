@@ -1,17 +1,22 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './App.css';
+import {useDispatch, useSelector} from "react-redux";
+import {RootStateType} from "./state/store";
+import {addCashAC, getCashAC} from "./state/cash-reducer";
 
 function App() {
-    const [cash, setCash] = useState<number>(0)
+    const dispatch = useDispatch()
+    const cashSelector:number = useSelector<RootStateType, number>(state => state.cash.cash)
+
     const addCash = (value: number) => {
-        setCash(value)
+        dispatch(addCashAC(value))
     }
     const getCash = (value: number) => {
-        setCash(value)
+        dispatch(getCashAC(value))
     }
     return (
         <div>
-            <div>{cash}</div>
+            <div>{cashSelector}</div>
             <div>
                 <button onClick={() => addCash(Number(prompt()))}>Add cash</button>
                 <button onClick={() => getCash(Number(prompt()))}>Get cash</button>
