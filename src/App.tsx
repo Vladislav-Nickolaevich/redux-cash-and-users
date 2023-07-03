@@ -1,13 +1,14 @@
 import React from 'react';
 import './App.css';
-import {useDispatch, useSelector} from "react-redux";
-import {RootStateType} from "./state/store";
+import {useSelector} from "react-redux";
+import {RootStateType, useAppDispatch} from "./state/store";
 import {addCashAC, getCashAC} from "./state/cash-reducer";
 import {addUserAC, deleteUserAC, UserType} from "./state/user-reducer";
+import {getManyUsers} from "./state/getManyUsers";
 
 
 function App() {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const cashSelector: number = useSelector<RootStateType, number>(state => state.cash.cash)
     const userSelector: UserType[] = useSelector<RootStateType, UserType[]>(state => state.users.users)
 
@@ -37,6 +38,7 @@ function App() {
                 <button onClick={() => getCash(Number(prompt()))}>Get cash</button>
 
                 <button onClick={() => addUser(String(prompt()))}>Add User</button>
+                <button onClick={() => dispatch(getManyUsers())}>Get Users</button>
             </div>
 
             <div style={{textAlign: 'center', marginTop: '20px'}}>
